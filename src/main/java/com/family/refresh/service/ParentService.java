@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.family.refresh.models.Child;
@@ -20,10 +21,10 @@ public class ParentService {
 	@Autowired
 	private ParentRepository parentRepository;
 	
-	@Autowired
-	private ChildRepository childRepository;
+//	@Autowired
+//	private ChildRepository childRepository;
 	
-	
+//	@Cacheable(value="parentCache")
 	public List<Parent> getAllParents() {
 		return parentRepository.findAll();
 	}

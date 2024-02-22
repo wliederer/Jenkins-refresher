@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.family.refresh.models.Child;
 
-@Repository
+
 public interface ChildRepository extends JpaRepository<Child,Long> {
 
 }

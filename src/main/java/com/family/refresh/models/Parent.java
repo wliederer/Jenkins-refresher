@@ -1,6 +1,9 @@
 package com.family.refresh.models;
 
+import java.io.Serializable;
 import java.util.List;
+
+import org.springframework.data.redis.core.RedisHash;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,6 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+//@RedisHash("Parent")
 public class Parent extends Person {
 	
 	

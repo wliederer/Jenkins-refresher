@@ -1,5 +1,6 @@
 package com.family.refresh.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Person {
+public abstract class Person implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

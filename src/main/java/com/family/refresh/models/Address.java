@@ -1,5 +1,7 @@
 package com.family.refresh.models;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Address {
+public class Address implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
