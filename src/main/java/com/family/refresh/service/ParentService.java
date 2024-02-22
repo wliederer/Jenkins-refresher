@@ -24,8 +24,9 @@ public class ParentService {
 //	@Autowired
 //	private ChildRepository childRepository;
 	
-//	@Cacheable(value="parentCache")
+	@Cacheable(value="parents")
 	public List<Parent> getAllParents() {
+		logger.info("Getting all parents from db");
 		return parentRepository.findAll();
 	}
 	
