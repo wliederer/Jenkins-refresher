@@ -63,15 +63,34 @@ public class SecurityConfig {
 	@Order(3)
 	public SecurityFilterChain parentsFilterChain(HttpSecurity http) throws Exception {
 		return http.securityMatcher("/parents/**").authorizeHttpRequests(auth -> {
-			auth.anyRequest().authenticated();
+//			auth.anyRequest().authenticated();
+			auth.anyRequest().permitAll();
 		})
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authenticationProvider(authenticationProvider)
-				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
+//				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//				.authenticationProvider(authenticationProvider)
+//				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+				.csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/parents/**")))
+				.headers(headers -> headers.frameOptions(Customizer.withDefaults()).disable())
+				.build();
 	}
 	
 	@Bean
 	@Order(4)
+	public SecurityFilterChain childsFilterChain(HttpSecurity http) throws Exception {
+		return http.securityMatcher("/childs/**").authorizeHttpRequests(auth -> {
+//			auth.anyRequest().authenticated();
+			auth.anyRequest().permitAll();
+		})
+//				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//				.authenticationProvider(authenticationProvider)
+//				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+				.csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/childs/**")))
+				.headers(headers -> headers.frameOptions(Customizer.withDefaults()).disable())
+				.build();
+	}
+	
+	@Bean
+	@Order(5)
 	public SecurityFilterChain authFilterChain(HttpSecurity http) throws Exception {
 		return http.securityMatcher("/auth/**").authorizeHttpRequests(auth -> {
 			auth.anyRequest().permitAll();
@@ -82,7 +101,7 @@ public class SecurityConfig {
 
 
 	@Bean
-	@Order(5)
+	@Order(6)
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers("/").permitAll();
